@@ -1,23 +1,29 @@
 import { useState } from 'react';
+import AuthService from './AuthService';
 
 function PostComment(props) {
+
+  const API_URL = process.env.REACT_APP_API;
+  const authService = new AuthService(`${API_URL}/users/authenticate`);
+
   const { addComment, id } = props;
 
-  const [username, setUsername] = useState("");
-  const [comments, setComment] = useState("");
+  console.log(id);
+
+  const [comments, setComment] = useState('');
+
+  const username = authService.getUsername();
 
   // Conditional rendering
   return (
     <>
       <h2>Your comment</h2>
-      <div className="comment-box">
-        <input onChange={(event) => setUsername(event.target.value)} type="text"/>
-        <br />
+      <div className='comment-box'>
         <textarea onChange={(event) => setComment(event.target.value)} />
         <br />
       </div>
       <br />
-      <button type="button" className="blue" onClick={(event) => { addComment(id, username, comments) }}>Post Your Comment</button>
+      <button type='button' className='blue' onClick={(event) => { addComment(id, username, comments)}}>Post Your Comment</button>
     </>
   );
 }

@@ -1,22 +1,23 @@
-import "../css/style.css";
-import { Link, Router } from "@reach/router";
+import '../css/style.css';
+import { Link } from '@reach/router';
+import AuthService from './AuthService';
+
+const API_URL = process.env.REACT_APP_API;
+const authService = new AuthService(`${API_URL}/users/authenticate`);
 
 function Navbar() {
 
   return (
     <>
       <header>
-        <div className="flex-row space-between">
+        <div className='flex-row space-between'>
             <Link to={`/`}>Home</Link>
-            <p>All topics</p>
-            <p>Food</p>
-            <p>Politics</p>
-            <p>News</p>
-            <p>Gardening</p>
-            <div className="nav-buttons">
+            <p>View posts</p>
               <Link to={`/add-post`}>Submit a post</Link>
-              <button className="">Login</button>
-            </div>
+              {!authService.loggedIn() ? 
+              <div>
+                <Link to={`/login`}>Login</Link>
+              </div> : <button onClick={authService.logout()}>Logout</button>}
           </div>
       </header>
     </>

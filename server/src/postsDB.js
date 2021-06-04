@@ -1,7 +1,7 @@
 module.exports = (mongoose) => {
   const postScheme = new mongoose.Schema({
-    username: String,
     title: String,
+    username: String,
     topicName: String,
     submitDate: String
   });
@@ -13,22 +13,28 @@ module.exports = (mongoose) => {
     commentDate: String
   });
 
-  // const scoreScheme = new mongoose.Schema({
-  //   id: Number,
-  //   scorePoints: Number
-  // });
+  const userScheme = new mongoose.Schema({
+    username: String,
+    password: String
+  });
 
-  const postModel = mongoose.model('post', postScheme);
-  const commentModel = mongoose.model('comment', commentScheme);
+  const voteScheme = new mongoose.Schema({
+    id: String,
+    votePoints: Number
+  });
+
+  const postModel = mongoose.model('posts', postScheme);
+  const commentModel = mongoose.model('comments', commentScheme);
+  const userModel = mongoose.model('users', userScheme);
+  const voteModel = mongoose.model('votes', voteScheme);
 
   let date = new Date()
-  // const scoreModel = mongoose.model('score', scoreScheme);
 
   async function getPosts() {
     try {
       return await postModel.find();
     } catch (error) {
-      console.error("getPosts:", error.message);
+      console.error('getPosts:', error.message);
       return {};
     }
   }
@@ -37,7 +43,7 @@ module.exports = (mongoose) => {
     try {
       return await postModel.findById(id);
     } catch (error) {
-      console.error("getPost:", error.message);
+      console.error('getPost:', error.message);
       return {};
     }
   }
@@ -51,7 +57,7 @@ module.exports = (mongoose) => {
     try {
       return await commentModel.find();
     } catch (error) {
-      console.error("getComment:", error.message);
+      console.error('getComment:', error.message);
       return {};
     }
   }
@@ -61,25 +67,59 @@ module.exports = (mongoose) => {
     return comment.save();
   }
 
-  // async function getScore() {
-  //   try {
-  //     return await scoreModel.find();
-  //   } catch (error) {
-  //     console.error("getScore:", error.message);
-  //     return {};
-  //   }
-  // }
+  async function getUsers() {
+    try {
+      return await userModel.find();
+    } catch (error) {
+      console.error('getUsers:', error.message);
+      return {};
+    }
+  }
 
-  // async function createScore(id, scorePoints) {
-  //   let scoreValue = new scoreModel({id: id, scorePoints: scorePoints});
-  //   return scoreValue.save();
-  // }
+   async function getUser(username) {
+    try {
+      return await userModel.findOne({ 'username': username });
+    } catch (error) {
+      console.error('getUser:', error.message);
+      return {};
+    }
+  }
+
+  async function getSpecificUser(username) {
+    try {
+      return await userModel.findById(username);
+    } catch (error) {
+      console.error('getSpecificUser:', error.message);
+      return {};
+    }
+  }
+
+  async function getVotes() {
+    try {
+      return await voteModel.find();
+    } catch (error) {
+      console.error("getVotes:", error.message);
+      return {};
+    }
+  }
+
+  async function addVote(id, votePoints) {
+    let voteValue = new voteModel({id: id, votePoints: votePoints});
+    return voteValue.save();
+  }
+
+
 
   return {
     getPosts,
     getPost,
     createPost,
     getComments,
-    createComment
+    createComment,
+    getUsers,
+    getUser,
+    getSpecificUser,
+    getVotes,
+    addVote
   }
 }
