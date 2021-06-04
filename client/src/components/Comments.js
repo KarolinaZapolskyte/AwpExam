@@ -18,29 +18,25 @@ function Comments(props) {
     <>
       
       <h2>All comments</h2>
-          <div className='row'>
-          <div className='column'>
         {
-          comment.reverse().map( comment =>  
-            <div className='answer' key={comment._id}>
+          comment.length > 0 ? 
+          comment.sort( (a,b) => {return new Date(b.commentDate) - new Date(a.commentDate)}).map( (comment) => 
+            <div className='comments' key={comment._id}>
               <Link to={`/users/${comment.username}`}>
-                <p>Author: {comment.username}</p>
+                <p className="author"><b>Author:</b> {comment.username}</p>
               </Link>
-              <p>Date: {comment.commentDate}</p>
-              <p>Comment: {comment.commentText}</p>
+              <p><b>Comment:</b> {comment.commentText}</p>
+              <p><b>Date:</b> {comment.commentDate}</p>
             </div>
-            )
+            ) : <div><p>No comments to this post</p></div>
         }
-        </div>
-          <div className='column'>
-            <div className='answer-image'></div>
-          </div>
-        </div>
       <div className='post-answer'>
+      <h2>Your comment</h2>
         {!authService.loggedIn() ? 
           <div>
             <p>You must be logged in to post a comment</p>
-            <Link to={`/login`}>Login</Link>
+            <br />
+            <Link to={`/login`} className="login-link">Login</Link>
           </div> : <PostComment addComment={addComment} id={post._id}/> }
       </div>
 

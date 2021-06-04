@@ -16,6 +16,9 @@ function Posts(props) {
     }
   });
 
+  // sort by submitDate, the recent ones are the first
+  ;
+
   return (
     <>
       <h1>Recent posts</h1>
@@ -30,9 +33,17 @@ function Posts(props) {
         <h4>Topic name: {topic}</h4>
         {
           filter.length > 0 ? 
-          filter.map( (post, index) => { 
-            return index < 15 ? <div className='post-summary' key={post._id}>
-            <Link to={`/users/${post.username}`}>Author: {post.username}<br /></Link><Link to={`/post/${post._id}`}>Date: {post.submitDate}<br />Post title: {post.title}<br />Topic: {post.topicName}</Link>
+          filter.sort( (a,b) => {return new Date(b.submitDate) - new Date(a.submitDate)}).map( (post, index) => { 
+            return index < 15 ? <div className='post' key={post._id}>
+              <Link to={`/users/${post.username}`}>
+                <p className="author"><b>Author:</b> {post.username}</p>
+              </Link>
+              <Link to={`/post/${post._id}`}>
+                <div  className='post-summary'>
+                  <h2><b>Post title:</b> {post.title}</h2>
+                  <p><b>Topic:</b> {post.topicName}<br /><b>Date:</b> {post.submitDate}</p>
+                </div>
+              </Link>
           </div> : undefined } ) : <div><h2>Sorry, we don't have posts in this category</h2></div>
         }
       </div>

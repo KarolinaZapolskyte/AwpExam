@@ -2,7 +2,7 @@ import { useState } from 'react';
 import AuthService from './AuthService'
 
 function Login(props) {
-  const {login} = props;
+  const { login } = props;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

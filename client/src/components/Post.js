@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Router } from '@reach/router';
+import { Router, Link } from '@reach/router';
 import Comments from './Comments'
 
 const API_URL = process.env.REACT_APP_API;
@@ -112,15 +112,21 @@ function Post(props) {
               </svg>
             </div>
           <div className='column'>
-            <h3>Post: {post.title}</h3>
-            <p>Post topic: {post.topicName}</p>
-            <p>Author: {post.username}</p>
-            <p>Date: {post.submitDate}</p>
-          </div>
-          <div className='comments'>
-            <Router>
-              <Comments path='/' data={comments.reverse()} addComment={addComment} getPost={getPost} />
-            </Router>
+            <div className="post">
+              <Link to={`/users/${post.username}`}>
+                <p className="author"><b>Author:</b> {post.username}</p>
+              </Link>
+              <div className="post-summary">
+                <h2><b>Post:</b> {post.title}</h2>
+                <p><b>Post topic:</b> {post.topicName}</p>
+                <p><b>Date:</b> {post.submitDate}</p>
+              </div>
+            </div>
+            <div className='comments'>
+              <Router>
+                <Comments path='/' data={comments} addComment={addComment} getPost={getPost} />
+              </Router>
+            </div>
           </div>
         </div>
       </>

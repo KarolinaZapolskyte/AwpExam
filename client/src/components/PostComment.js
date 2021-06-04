@@ -17,7 +17,6 @@ function PostComment(props) {
   // Conditional rendering
   return (
     <>
-      <h2>Your comment</h2>
       <div className='comment-box'>
         <textarea onChange={(event) => setComment(event.target.value)} />
         <br />

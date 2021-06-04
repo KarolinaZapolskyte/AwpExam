@@ -11,6 +11,8 @@ function Profile(props) {
   let findCommentsByProfile = comments.filter(function( comment ) {
     return comment.username === username;
   });
+
+  console.log(comments);
   
     // Conditional rendering
     if (profile === undefined) {
@@ -20,7 +22,7 @@ function Profile(props) {
         <div>
             <h1>Profile: {username}</h1>
             <div>
-                <p>All posts</p>
+                <h2>All posts</h2>
                 {
           findPostsByProfile.length > 0 ? 
           findPostsByProfile.map( (post) => {
@@ -34,7 +36,7 @@ function Profile(props) {
         }
             </div>
             <div>
-                <p>All comments</p>
+                <h2>All comments</h2>
                 {
           findCommentsByProfile.length > 0 ? 
           findCommentsByProfile.map( (comment) => {
@@ -43,7 +45,7 @@ function Profile(props) {
                   <h2>Title: {comment.commentText}</h2>
                   <p>Date: {comment.commentDate}</p>
                   </Link>
-          </div>}) : <div><h2>This profile didn't post anything</h2></div>
+          </div>}) : <div><h2>This profile didn't write any comments</h2></div>
         }
             </div>
         </div>

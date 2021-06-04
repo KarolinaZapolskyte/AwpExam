@@ -46,6 +46,7 @@
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('username');
   }
 
   fetch(url, options) {

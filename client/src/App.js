@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import AddPost from './components/AddPost';
 import Login from './components/Login';
 import AuthService from './components/AuthService';
+import Navbar from './components/Navbar';
 
 const API_URL = process.env.REACT_APP_API;
 const authService = new AuthService(`${API_URL}/users/authenticate`);
@@ -17,6 +18,7 @@ function App() {
   const [users, setProfile] = useState([]);
   const [addPostData, setAddPost] = useState(0);
   let testDataPosts = [];
+  let testDataUsers = [];
 
   useEffect(() => { 
     async function getData() {
@@ -46,12 +48,19 @@ function App() {
     ]
   }
 
+  if (users.length === 0) {
+    testDataUsers = [
+      { _id: '784ssd84', username: 'anonymous', password: '123' },
+      { _id: '8854266sdwa', username: 'secret', password: 'hiddenPassword' }
+    ]
+  }
+
   function getPost(id) {
-    return posts.find(post => post._id === id);
+    return posts.length > 0 ? posts.find(post => post._id === id) : testDataPosts.find(post => post._id === id);
   }
 
   function getProfile(username) {
-    return users.find(user => user.username === username);
+    return users.length > 0 ? users.find(user => user.username === username) : testDataUsers.find(user => user.username === username);
   }
 
   function addPost(username, title, topicName) {
@@ -95,15 +104,21 @@ function App() {
     }
   }
 
+  function logout() {
+    authService.logout();
+      setAddPost(p => p + 1); // Refresh data after post is posted
+  }
+
   return (
     <>
+    <Navbar logout={logout} />
     <div className='main container'>
       <Router>
         <Posts path='/' data={posts.length === 0 ? testDataPosts : posts} />
         <Post path='/post/:id' getPost={getPost} />
         <Profile path='/users/:username' getProfile={getProfile} data={posts} comments={comments} />
         <AddPost path='/add-post' addPost={addPost} />
-        <Login path='/login' login={login} />
+        <Login path='/login' login={login} logout={logout} />
       </Router>
     </div>
 

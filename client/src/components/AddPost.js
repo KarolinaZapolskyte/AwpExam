@@ -20,16 +20,17 @@ function AddPost(props) {
         <h1 className='bold'>Post submission</h1>
           {!authService.loggedIn() ? 
           <div>
-            <p>You must be logged in to add a post</p>
-            <Link to={`/login`}>Login</Link>
+            <p>You must be logged in to submit6 a post</p>
+            <br />
+            <Link to={`/login`} className="login-link">Login</Link>
           </div> : ''}
-        <div className='row'>
-          <div className='column'>
-            <div className='question-boxes'>
+            <div className='post-box'>
               <label>Post title</label>
+              <br />
               <input onChange={(event) => setTitle(event.target.value)} type='text' />
               <br />
               <label>Topic</label>
+              <br />
               <select onChange={(event) => setTopicName(event.target.value)}>
                 <option value=''>Select your option</option>
                 <option value='Food'>Food</option>
@@ -40,8 +41,6 @@ function AddPost(props) {
             </div>
             <br />
             <button type='button' disabled={topicName === '' || title === '' || !authService.loggedIn()}  onClick={(event) => { addPost(username, title, topicName) }}>Submit your post</button>
-          </div>
-        </div>
     </>
   );
 }

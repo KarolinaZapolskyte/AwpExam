@@ -5,10 +5,31 @@
     width: 100%;
 }
 
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 5%;
+    margin-right: 3%;
+    margin-top: 18px;
+}
+
+.column:last-child {
+    align-items: initial;
+    width: 90%;
+    margin-right: 0%;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: -webkit-fill-available;
 }
 
 .space-between {
@@ -16,11 +37,22 @@
     justify-content: space-between;
 }
 
+.flex-end {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 /* end of helpers */
 
 header {
     background: #212121;
     color: white;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 8px 32px
 }
 
@@ -29,7 +61,107 @@ header a {
     text-decoration: none;
 }
 
+header a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    border-radius: 16px;
+    padding: 8px 16px;
+    border: 2px solid white;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: white;
+    color: black;
+    border-color: black;
+}
+
+.btn:first-child {
+    margin-right: 14px
+}
+
 body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
+}
+
+.post {
+    padding: 8px 16px;
+    background: #e6e6e6;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+}
+
+.post-summary {
+    padding: 8px 16px;
+    border-top: 1px solid #212121;
+}
+
+.post-summary h2 {
+    margin: 0;
+    font-weight: 400;
+}
+
+.post-summary .author {
+    padding: 0 4px;
+}
+
+.post-summary .author:hover {
+    background: white;
+}
+
+.author {
+    margin-bottom: 4px;
+    width: fit-content;
+}
+
+.author:hover {
+    background: #e6e6e6;
+}
+
+.voting svg {
+    cursor: pointer;
+}
+
+.voting svg path:hover {
+    fill: #e6e6e6
+}
+
+.comments {
+    margin-bottom: 14px;
+}
+
+.comments:last-child {
+    margin: 0;
+}
+
+.login-link {
+    border-radius: 8px;
+    background: #212121;
+    color: white;
+    padding: 8px 16px;
+}
+
+.login-link:hover {
+    background: #e6e6e6;
+    color: black;
+    border: 1px solid black
+}
+
+.post-box {
+    margin-top: 14px;
 }
