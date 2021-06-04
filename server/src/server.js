@@ -21,6 +21,7 @@ const connectionParams={
     useCreateIndex: true,
     useUnifiedTopology: true 
 }
+
 mongoose.connect(url,connectionParams)
     .then( () => {
         console.log('Connected to database ')

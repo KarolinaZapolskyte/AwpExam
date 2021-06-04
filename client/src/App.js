@@ -16,6 +16,7 @@ function App() {
   const [comments, setComment] = useState([]);
   const [users, setProfile] = useState([]);
   const [addPostData, setAddPost] = useState(0);
+  let testDataPosts = [];
 
   useEffect(() => { 
     async function getData() {
@@ -37,6 +38,14 @@ function App() {
     getData();
   }, [addPostData]);  
   
+
+  if (posts.length === 0) {
+    testDataPosts = [
+      {_id: '4564da6s', title: 'Post1', topicName:'Food', username: 'anonyomus', submitDate:'6/2/2021'},
+      {_id: '4564564asdda', title: 'Post2', topicName:'Politics', username: 'anonyomus', submitDate:'6/3/2021'}
+    ]
+  }
+
   function getPost(id) {
     return posts.find(post => post._id === id);
   }
@@ -90,7 +99,7 @@ function App() {
     <>
     <div className='main container'>
       <Router>
-        <Posts path='/' data={posts} />
+        <Posts path='/' data={posts.length === 0 ? testDataPosts : posts} />
         <Post path='/post/:id' getPost={getPost} />
         <Profile path='/users/:username' getProfile={getProfile} data={posts} comments={comments} />
         <AddPost path='/add-post' addPost={addPost} />

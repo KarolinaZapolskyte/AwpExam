@@ -49,7 +49,7 @@ module.exports = (postsDB) => {
   
   //  profiles
   router.get('/users', async (req, res) => {
-    const users = await postsDB.getUsers()
+    const users = await postsDB.getUsers();
     res.json(users);
   });
 

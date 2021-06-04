@@ -1,9 +1,4 @@
-import { useState, useEffect } from 'react';
 import { Link } from '@reach/router';
-import { Router } from '@reach/router';
-import Comments from './Comments'
-
-const API_URL = process.env.REACT_APP_API;
 
 function Profile(props) {
   const { data, comments, username, getProfile } = props;
@@ -13,14 +8,9 @@ function Profile(props) {
     return post.username === username;
   });
 
-
-  console.log(comments);
   let findCommentsByProfile = comments.filter(function( comment ) {
-      console.log(comment);
     return comment.username === username;
   });
-
-
   
     // Conditional rendering
     if (profile === undefined) {

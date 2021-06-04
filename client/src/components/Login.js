@@ -5,9 +5,7 @@ function Login(props) {
   const {login} = props;
 
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState(''); 
-  // const [regUsername, setRegUsername] = useState('');
-  // const [regPassword, setRegPassword] = useState('');
+  const [password, setPassword] = useState('');
 
   const API_URL = process.env.REACT_APP_API;
   const authService = new AuthService(`${API_URL}/users/authenticate`);
@@ -28,16 +26,6 @@ function Login(props) {
         <button type='button' onClick={() => logIn() }>Login</button>
         </div>
         : <p>You are loged in!</p>}
-        {/* <h2>Register</h2>
-      {!authService.loggedIn() ? 
-      <div>
-        <input onChange={(event) => setRegUsername(event.target.value)} 
-          type='text' name='username' placeholder='username'></input>
-        <input onChange={(event) => setRegPassword(event.target.value)} 
-          type='password' name='password' placeholder='password'></input>
-        <button type='button' onClick={() => () }>Login</button>
-        </div>
-        : <p>You are loged in!</p>} */}
     </>
   );
 }

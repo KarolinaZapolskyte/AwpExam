@@ -21,7 +21,7 @@ function Comments(props) {
           <div className='row'>
           <div className='column'>
         {
-          comment.map( comment =>  
+          comment.reverse().map( comment =>  
             <div className='answer' key={comment._id}>
               <Link to={`/users/${comment.username}`}>
                 <p>Author: {comment.username}</p>

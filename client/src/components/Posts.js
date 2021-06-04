@@ -11,6 +11,7 @@ function Posts(props) {
     if (topic !== 'All topics') {
       return top.topicName === topic;
     } else {
+      console.log(data.reverse());
       return data.reverse()
     }
   });
